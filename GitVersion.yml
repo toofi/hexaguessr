@@ -1,9 +1,13 @@
 workflow: GitFlow/v1
-mode: ContinuousDeployment
 branches:
-  master:
+  main:
+    regex: ^master$|^main$
     label: ''
     increment: Patch
+    is-main-branch: true
   develop:
+    regex: ^develop$
     label: alpha
     increment: Minor
+    source-branches: ['main', 'master', 'release', 'hotfix', 'support', 'feature']
+    track-merge-target: true

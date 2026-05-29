@@ -1,0 +1,88 @@
+{
+  "configVersion": 1,
+  "timestamp": 1780062821265,
+  "index": "/hexaguessr/dev/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/hexaguessr/dev/favicon.ico",
+        "/hexaguessr/dev/index.html",
+        "/hexaguessr/dev/main-L4G6I4NR.js",
+        "/hexaguessr/dev/manifest.webmanifest",
+        "/hexaguessr/dev/polyfills-5CFQRCPP.js",
+        "/hexaguessr/dev/styles-7B2KB3LY.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/hexaguessr/dev/icons/apple-touch-icon.png",
+        "/hexaguessr/dev/icons/icon-192.png",
+        "/hexaguessr/dev/icons/icon-512.png",
+        "/hexaguessr/dev/icons/icon-maskable-512.png",
+        "/hexaguessr/dev/icons/icon-maskable.svg",
+        "/hexaguessr/dev/icons/icon.svg"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "google-fonts",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*",
+        "https:\\/\\/fonts\\.gstatic\\.com\\/.*"
+      ]
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/hexaguessr/dev/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/hexaguessr/dev/icons/apple-touch-icon.png": "4acbe82973b79f03074136013bd7105e66d2cca9",
+    "/hexaguessr/dev/icons/icon-192.png": "905dc11aade0c6989de76ab7c103c1a42cab201c",
+    "/hexaguessr/dev/icons/icon-512.png": "8e4322ace6882b409d35e79ffc6ee9dab63bf9f3",
+    "/hexaguessr/dev/icons/icon-maskable-512.png": "0b67cf87a79ad9bc5efd5e76c31461cb57df8e03",
+    "/hexaguessr/dev/icons/icon-maskable.svg": "c48ba833eae2ba35c3608c6df945a96d0d7c46f7",
+    "/hexaguessr/dev/icons/icon.svg": "c39c2a2a2b24368ed2c6b786d040d36104666c6a",
+    "/hexaguessr/dev/index.html": "3ee0ac9514732d45e59e6b0241abbb3ba01dde39",
+    "/hexaguessr/dev/main-L4G6I4NR.js": "fe807fe1e5ad0e40862217c4ea10d91d205bab29",
+    "/hexaguessr/dev/manifest.webmanifest": "bc9dedadb413a99ed1acc8136aac18515cbb6b3f",
+    "/hexaguessr/dev/polyfills-5CFQRCPP.js": "f2241e9a25858f895ce299d15f6f22e849e2fd72",
+    "/hexaguessr/dev/styles-7B2KB3LY.css": "623255bf7cbd0bce43b3b16e68c543306c7f0f58"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

@@ -3,6 +3,9 @@ branches:
   master:
     tag: ''
     increment: Patch
+    is-main-branch: true
   develop:
     tag: alpha
     increment: Minor
+    source-branches: ['main', 'master', 'release', 'hotfix', 'support', 'feature']
+    track-merge-target: true

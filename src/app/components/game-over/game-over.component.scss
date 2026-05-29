@@ -1,0 +1,126 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 20px;
+  gap: 18px;
+}
+
+h2 {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.total {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total strong {
+  font-family: var(--mono);
+  font-size: 2.6rem;
+  color: var(--green);
+}
+
+.total span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.badge {
+  align-self: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge .emoji {
+  font-size: 1.1rem;
+}
+
+.rounds {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rounds li {
+  display: grid;
+  grid-template-columns: 24px 28px 1fr 28px auto;
+  align-items: center;
+  gap: 10px;
+  background: var(--text);
+  color: #2a2a3a;
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.num {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--surface-2);
+}
+
+.swatch.empty {
+  border: 1px dashed var(--border-strong);
+  background: transparent;
+}
+
+.label {
+  color: var(--text-faint);
+  font-size: 0.78rem;
+}
+
+.pts {
+  font-family: var(--mono);
+  color: var(--green);
+  font-weight: 700;
+}
+
+.pts.zero {
+  color: var(--red);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cta {
+  font-family: var(--mono);
+  padding: 14px;
+  border-radius: var(--radius);
+  font-weight: 700;
+}
+
+.cta.primary {
+  background: var(--green);
+  color: #07140d;
+}
+
+.cta.ghost {
+  background: var(--text);
+  color: #2a2a3a;
+}

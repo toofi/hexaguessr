@@ -1,12 +1,18 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { GameService } from './services/game.service';
+import { MenuComponent } from './components/menu/menu.component';
+import { GameComponent } from './components/game/game.component';
+import { RoundResultComponent } from './components/round-result/round-result.component';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MenuComponent, GameComponent, RoundResultComponent, GameOverComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('hexaguessr');
+  protected readonly game = inject(GameService);
 }

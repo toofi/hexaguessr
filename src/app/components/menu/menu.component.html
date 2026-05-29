@@ -1,0 +1,20 @@
+<section class="menu">
+  <div class="logo-ring" aria-hidden="true"></div>
+
+  <header class="brand">
+    <h1>HEXAGUESSR</h1>
+    <p>Colour Recognition Game</p>
+  </header>
+
+  <button type="button" class="cta" (click)="start()">▶ PLAY</button>
+
+  <ul class="rules">
+    <li>A hex code → find the colour</li>
+    <li>10.00 seconds × 10 rounds</li>
+    <li>Accurate + fast = more points</li>
+  </ul>
+
+  @if (storage.bestScore > 0) {
+    <p class="best">Best score: {{ storage.bestScore }} pts</p>
+  }
+</section>

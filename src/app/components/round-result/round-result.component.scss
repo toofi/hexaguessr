@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.result {
+  min-height: 100dvh;
+  transition: background-color 0.4s ease;
+}
+
+.overlay {
+  min-height: 100dvh;
+  background: rgba(13, 13, 20, 0.78);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.top .time {
+  color: var(--green);
+}
+
+.picker-placeholder {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  aspect-ratio: 1 / 1;
+  max-height: 60vh;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.swatch {
+  border-radius: var(--radius-sm);
+  padding: 22px 10px 10px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 70px;
+  justify-content: flex-end;
+}
+
+.swatch small {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+.vs {
+  color: var(--text-muted);
+  font-family: var(--mono);
+  font-size: 1.1rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.stat {
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat small {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.stat strong {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.stat .green {
+  color: var(--green);
+}
+
+.cta {
+  background: var(--green);
+  color: #07140d;
+  font-family: var(--mono);
+  font-weight: 700;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+}

@@ -99,3 +99,13 @@
   color: var(--text-faint);
   font-size: 0.85rem;
 }
+
+.version {
+  margin-top: auto;
+  padding-top: 24px;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}

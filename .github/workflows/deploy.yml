@@ -24,11 +24,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3
+        with:
+          versionSpec: '6.x'
+      - name: Determine version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v3
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
       - run: npm ci
+      - name: Inject version
+        run: echo "export const APP_VERSION = '${{ steps.gitversion.outputs.semVer }}';" > src/app/version.ts
       - run: npm run build -- --base-href /hexaguessr/
       - name: Copy index.html to 404.html for SPA fallback
         run: cp dist/hexaguessr/browser/index.html dist/hexaguessr/browser/404.html
@@ -37,6 +48,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/hexaguessr/browser
           keep_files: true
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.gitversion.outputs.semVer }}
+          name: v${{ steps.gitversion.outputs.semVer }}
+          generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-dev:
     needs: build
@@ -44,11 +62,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3
+        with:
+          versionSpec: '6.x'
+      - name: Determine version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v3
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
       - run: npm ci
+      - name: Inject version
+        run: echo "export const APP_VERSION = '${{ steps.gitversion.outputs.semVer }}';" > src/app/version.ts
       - run: npm run build -- --base-href /hexaguessr/dev/
       - name: Copy index.html to 404.html for SPA fallback
         run: cp dist/hexaguessr/browser/index.html dist/hexaguessr/browser/404.html

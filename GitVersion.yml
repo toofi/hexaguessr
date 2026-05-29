@@ -1,0 +1,9 @@
+workflow: GitFlow/v1
+mode: ContinuousDeployment
+branches:
+  master:
+    label: ''
+    increment: Patch
+  develop:
+    label: alpha
+    increment: Minor

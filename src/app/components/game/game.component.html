@@ -1,0 +1,23 @@
+<section class="game">
+  <header class="top">
+    <span class="round">{{ game.currentRoundNumber() }} / {{ totalRounds }}</span>
+    <div class="progress" [style.--p]="progress()"></div>
+    <span class="score">{{ game.totalScore() }} pts</span>
+  </header>
+
+  <div class="timer">
+    <span class="seconds">{{ seconds() }}</span>
+    <span class="hundredths">.{{ hundredths() }}</span>
+  </div>
+  <p class="timer-label">SECONDS</p>
+
+  <p class="prompt">FIND THIS COLOUR</p>
+  <p class="hex">{{ targetHex() }}</p>
+
+  <div class="picker-placeholder">
+    <button type="button" class="dev-shortcut" (click)="pickTarget()">
+      [DEV] Submit exact colour
+    </button>
+    <p class="hint">The 2D picker will be added in the next step.</p>
+  </div>
+</section>

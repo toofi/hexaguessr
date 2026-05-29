@@ -1,0 +1,45 @@
+@if (result(); as r) {
+  <section class="result" [style.background-color]="r.targetHex">
+    <div class="overlay">
+      <header class="top">
+        <span class="label">RESULT · ROUND {{ r.roundNumber }}</span>
+        <span class="time">{{ secondsLeft() }}s left</span>
+      </header>
+
+      <div class="picker-placeholder">
+        <p>Frozen picker + pins (next step)</p>
+      </div>
+
+      <footer class="panel">
+        <div class="swatches">
+          <div class="swatch" [style.background-color]="r.chosenHex ?? '#222'">
+            <span>{{ r.chosenHex ?? '—' }}</span>
+            <small>YOUR PICK</small>
+          </div>
+          <div class="vs">Δ</div>
+          <div class="swatch" [style.background-color]="r.targetHex">
+            <span>{{ r.targetHex }}</span>
+            <small>ANSWER</small>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <small>Distance</small>
+            <strong>{{ r.distance.toFixed(0) }}</strong>
+          </div>
+          <div class="stat">
+            <small>Points</small>
+            <strong class="green">+{{ r.roundScore }}</strong>
+          </div>
+          <div class="stat">
+            <small>Total</small>
+            <strong>{{ game.totalScore() }}</strong>
+          </div>
+        </div>
+
+        <button type="button" class="cta" (click)="next()">Continue →</button>
+      </footer>
+    </div>
+  </section>
+}

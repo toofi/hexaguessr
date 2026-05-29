@@ -1,0 +1,36 @@
+<section class="over">
+  <h2>GAME OVER</h2>
+
+  <div class="total">
+    <strong>{{ game.totalScore() }}</strong>
+    <span>/ {{ maxScore }} pts</span>
+  </div>
+
+  <div class="badge" [style.color]="badge().color">
+    <span class="emoji">{{ badge().emoji }}</span>
+    <span>{{ badge().label }}</span>
+  </div>
+
+  <ul class="rounds">
+    @for (r of game.rounds(); track r.roundNumber) {
+      <li>
+        <span class="num">{{ r.roundNumber }}</span>
+        <span class="swatch" [style.background-color]="r.targetHex"></span>
+        <span class="label">
+          @if (r.isTimeout) { timed out } @else { vs. }
+        </span>
+        @if (r.chosenHex) {
+          <span class="swatch" [style.background-color]="r.chosenHex"></span>
+        } @else {
+          <span class="swatch empty"></span>
+        }
+        <span class="pts" [class.zero]="r.roundScore === 0">+{{ r.roundScore }}</span>
+      </li>
+    }
+  </ul>
+
+  <div class="actions">
+    <button type="button" class="cta primary" (click)="replay()">↻ Replay</button>
+    <button type="button" class="cta ghost" (click)="toMenu()">Menu</button>
+  </div>
+</section>

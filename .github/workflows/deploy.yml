@@ -24,11 +24,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
       - run: npm ci
+      - name: Compute version (from package.json)
+        id: version
+        run: |
+          V=$(node -p "require('./package.json').version")
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          echo "Release version: v$V"
+      - name: Inject version into bundle
+        run: echo "export const APP_VERSION = '${{ steps.version.outputs.version }}';" > src/app/version.ts
       - run: npm run build -- --base-href /hexaguessr/
       - name: Copy index.html to 404.html for SPA fallback
         run: cp dist/hexaguessr/browser/index.html dist/hexaguessr/browser/404.html
@@ -37,6 +47,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist/hexaguessr/browser
           keep_files: true
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   deploy-dev:
     needs: build
@@ -44,11 +61,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
       - run: npm ci
+      - name: Compute version (alpha pre-release)
+        id: version
+        run: |
+          BASE=$(node -p "require('./package.json').version")
+          # Strip any existing pre-release suffix so we don't double-suffix
+          BASE=${BASE%%-*}
+          # Count commits ahead of master (fallback to total count if origin/master is missing)
+          COUNT=$(git rev-list --count origin/master..HEAD 2>/dev/null || git rev-list --count HEAD)
+          SHA=$(git rev-parse --short HEAD)
+          V="${BASE}-alpha.${COUNT}+${SHA}"
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          echo "Dev version: v$V"
+      - name: Inject version into bundle
+        run: echo "export const APP_VERSION = '${{ steps.version.outputs.version }}';" > src/app/version.ts
       - run: npm run build -- --base-href /hexaguessr/dev/
       - name: Copy index.html to 404.html for SPA fallback
         run: cp dist/hexaguessr/browser/index.html dist/hexaguessr/browser/404.html

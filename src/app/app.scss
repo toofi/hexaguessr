@@ -5,11 +5,114 @@
   background: var(--bg);
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1; // sits above the desktop aurora
 }
 
 @media (min-width: 481px) {
   .shell {
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
+  }
+}
+
+/* ── DESKTOP AURORA — bleeds into the side bands around the shell ───── */
+/* Hidden on mobile: the shell takes the whole viewport so this would be
+   invisible anyway. The menu component has its own scoped aurora for mobile. */
+.aurora-bg {
+  display: none;
+}
+
+@media (min-width: 481px) {
+  .aurora-bg {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .aurora-bg .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+
+  /* Positions are designed to land in the LEFT and RIGHT side bands.
+     Anything in the shell area (centred 480px) is hidden by the shell bg. */
+  .aurora-bg .blob-1 {
+    width: 520px;
+    height: 520px;
+    top: -160px;
+    left: -120px;
+    background: radial-gradient(circle, #4ade80 0%, transparent 70%);
+    opacity: 0.55;
+    animation: aurora-drift-1 32s ease-in-out infinite alternate;
+  }
+  .aurora-bg .blob-2 {
+    width: 480px;
+    height: 480px;
+    top: 18%;
+    right: -150px;
+    background: radial-gradient(circle, #5555ff 0%, transparent 70%);
+    opacity: 0.5;
+    animation: aurora-drift-2 38s ease-in-out infinite alternate;
+  }
+  .aurora-bg .blob-3 {
+    width: 540px;
+    height: 540px;
+    bottom: -150px;
+    left: -160px;
+    background: radial-gradient(circle, #d755ff 0%, transparent 70%);
+    opacity: 0.5;
+    animation: aurora-drift-3 44s ease-in-out infinite alternate;
+  }
+  .aurora-bg .blob-4 {
+    width: 420px;
+    height: 420px;
+    bottom: 8%;
+    right: -120px;
+    background: radial-gradient(circle, #facc15 0%, transparent 70%);
+    opacity: 0.35; // yellow is intense
+    animation: aurora-drift-4 36s ease-in-out infinite alternate;
+  }
+  .aurora-bg .blob-5 {
+    width: 440px;
+    height: 440px;
+    top: 45%;
+    left: -120px;
+    background: radial-gradient(circle, #55d7ff 0%, transparent 70%);
+    opacity: 0.45;
+    animation: aurora-drift-5 50s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes aurora-drift-1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(200px, 160px) scale(1.1); }
+}
+@keyframes aurora-drift-2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-160px, 220px) scale(1.05); }
+}
+@keyframes aurora-drift-3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(180px, -200px) scale(1.08); }
+}
+@keyframes aurora-drift-4 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-200px, -160px) scale(1.12); }
+}
+@keyframes aurora-drift-5 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(160px, -140px) scale(0.92); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-bg .blob {
+    animation: none !important;
   }
 }

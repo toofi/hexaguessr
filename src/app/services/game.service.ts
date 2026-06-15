@@ -4,7 +4,7 @@ import {
   BadgeLevel,
   GameState,
   MAX_GAME_SCORE,
-  MAX_ROUND_SCORE,
+  PickerPosition,
   RGB,
   ROUNDS_PER_GAME,
   ROUND_DURATION_SECONDS,
@@ -57,7 +57,7 @@ export class GameService {
     this.timer.start(ROUND_DURATION_SECONDS, () => this.handleTimeout());
   }
 
-  submitGuess(chosen: RGB): void {
+  submitGuess(chosen: RGB, position?: PickerPosition): void {
     const target = this.currentTarget();
     if (!target || this.state() !== 'playing') return;
     const timeRemaining = this.timer.stop();
@@ -70,6 +70,7 @@ export class GameService {
       targetRgb: target,
       chosenHex: rgbToHex(chosen),
       chosenRgb: chosen,
+      chosenPosition: position ?? null,
       distance,
       proximity: prox,
       timeRemaining,
@@ -87,6 +88,7 @@ export class GameService {
       targetRgb: target,
       chosenHex: null,
       chosenRgb: null,
+      chosenPosition: null,
       distance: 0,
       proximity: 0,
       timeRemaining: 0,

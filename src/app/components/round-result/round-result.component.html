@@ -6,8 +6,43 @@
         <span class="time">{{ secondsLeft() }}s left</span>
       </header>
 
-      <div class="picker-placeholder">
-        <p>Frozen picker + pins (next step)</p>
+      <div class="picker">
+        <canvas #canvas></canvas>
+
+        @if (chosenPosition(); as chosen) {
+          <svg class="line" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <line
+              [attr.x1]="chosen.x * 100 + '%'"
+              [attr.y1]="chosen.y * 100 + '%'"
+              [attr.x2]="targetPosition().x * 100 + '%'"
+              [attr.y2]="targetPosition().y * 100 + '%'"
+              stroke="white"
+              stroke-width="2"
+              stroke-dasharray="6 5"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <div
+            class="pin pin-wrong"
+            [class.flip-label]="chosen.y < 0.15"
+            [style.left.%]="chosen.x * 100"
+            [style.top.%]="chosen.y * 100"
+          >
+            <span class="symbol">✕</span>
+            <span class="pin-label">YOUR PICK</span>
+          </div>
+        }
+
+        <div
+          class="pin pin-correct"
+          [class.flip-label]="targetPosition().y < 0.15"
+          [style.left.%]="targetPosition().x * 100"
+          [style.top.%]="targetPosition().y * 100"
+        >
+          <span class="symbol">✓</span>
+          <span class="pin-label">ANSWER</span>
+        </div>
       </div>
 
       <footer class="panel">

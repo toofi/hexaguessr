@@ -12,19 +12,19 @@
   </div>
 
   <ul class="rounds">
-    @for (r of game.rounds(); track r.roundNumber) {
+    @for (roundResult of game.rounds(); track roundResult.roundNumber) {
       <li>
-        <span class="num">{{ r.roundNumber }}</span>
-        <span class="swatch" [style.background-color]="r.targetHex"></span>
+        <span class="num">{{ roundResult.roundNumber }}</span>
+        <span class="swatch" [style.background-color]="roundResult.targetHex"></span>
         <span class="label">
-          @if (r.isTimeout) { timed out } @else { vs. }
+          @if (roundResult.isTimeout) { timed out } @else { vs. }
         </span>
-        @if (r.chosenHex) {
-          <span class="swatch" [style.background-color]="r.chosenHex"></span>
+        @if (roundResult.chosenHex) {
+          <span class="swatch" [style.background-color]="roundResult.chosenHex"></span>
         } @else {
           <span class="swatch empty"></span>
         }
-        <span class="pts" [class.zero]="r.roundScore === 0">+{{ r.roundScore }}</span>
+        <span class="pts" [class.zero]="roundResult.roundScore === 0">+{{ roundResult.roundScore }}</span>
       </li>
     }
   </ul>

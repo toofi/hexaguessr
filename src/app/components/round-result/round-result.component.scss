@@ -31,18 +31,87 @@
   color: var(--green);
 }
 
-.picker-placeholder {
-  flex: 1;
-  background: var(--surface-2);
-  border: 1px dashed var(--border);
+.picker {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  background: var(--surface-2);
+}
+
+.picker canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.pin {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-faint);
-  font-size: 0.85rem;
-  aspect-ratio: 1 / 1;
-  max-height: 60vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+  font-weight: 700;
+  font-size: 0.95rem;
+  z-index: 2;
+}
+
+.pin-wrong {
+  background: var(--red);
+  color: #ffffff;
+}
+
+.pin-correct {
+  background: var(--green);
+  color: #07140d;
+  z-index: 3;
+}
+
+.pin .symbol {
+  line-height: 1;
+}
+
+.pin-label {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.78);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pin.flip-label .pin-label {
+  bottom: auto;
+  top: calc(100% + 6px);
 }
 
 .panel {

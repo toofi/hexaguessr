@@ -1,4 +1,4 @@
-import { HSL, RGB } from '../models/game.models';
+import { HSL, PickerPosition, RGB } from '../models/game.models';
 
 const MAX_DISTANCE = Math.sqrt(3 * 255 * 255);
 
@@ -50,13 +50,52 @@ export function rgbToHsl({ r, g, b }: RGB): HSL {
   return { h, s: s * 100, l: l * 100 };
 }
 
-export function rgbDistance(a: RGB, b: RGB): number {
-  const dr = a.r - b.r;
-  const dg = a.g - b.g;
-  const db = a.b - b.b;
-  return Math.sqrt(dr * dr + dg * dg + db * db);
+export function rgbDistance(target: RGB, chosen: RGB): number {
+  const distanceR = target.r - chosen.r;
+  const distanceG = target.g - chosen.g;
+  const distanceB = target.b - chosen.b;
+  const redMean = (target.r + chosen.r) / 2;
+
+  return Math.sqrt(
+    (2 + redMean/256) * distanceR ** 2 +
+    4 * distanceG ** 2 +
+    (2+(255-redMean)/256) * distanceB ** 2);
 }
 
 export function proximity(distance: number): number {
   return Math.max(0, 1 - distance / MAX_DISTANCE);
+}
+
+export function rgbToPickerPosition(rgb: RGB): PickerPosition {
+  const hsl = rgbToHsl(rgb);
+  return {
+    x: hsl.h / 360,
+    y: 1 - hsl.l / 100,
+  };
+}
+
+export function drawPicker(ctx: CanvasRenderingContext2D, w: number, h: number): void {
+  const hueGrad = ctx.createLinearGradient(0, 0, w, 0);
+  const stops: Array<[number, string]> = [
+    [0, '#ff0000'],
+    [1 / 6, '#ffff00'],
+    [2 / 6, '#00ff00'],
+    [3 / 6, '#00ffff'],
+    [4 / 6, '#0000ff'],
+    [5 / 6, '#ff00ff'],
+    [1, '#ff0000'],
+  ];
+  for (const [stop, color] of stops) {
+    hueGrad.addColorStop(stop, color);
+  }
+  ctx.fillStyle = hueGrad;
+  ctx.fillRect(0, 0, w, h);
+
+  const lightGrad = ctx.createLinearGradient(0, 0, 0, h);
+  lightGrad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  lightGrad.addColorStop(0.5, 'rgba(255, 255, 255, 0)');
+  lightGrad.addColorStop(0.5, 'rgba(0, 0, 0, 0)');
+  lightGrad.addColorStop(1, 'rgba(0, 0, 0, 1)');
+  ctx.fillStyle = lightGrad;
+  ctx.fillRect(0, 0, w, h);
 }

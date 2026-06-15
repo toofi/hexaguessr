@@ -22,12 +22,18 @@ export interface Point2D {
   y: number;
 }
 
+export interface PickerPosition {
+  x: number;
+  y: number;
+}
+
 export interface RoundResult {
   roundNumber: number;
   targetHex: string;
   targetRgb: RGB;
   chosenHex: string | null;
   chosenRgb: RGB | null;
+  chosenPosition: PickerPosition | null;
   distance: number;
   proximity: number;
   timeRemaining: number;

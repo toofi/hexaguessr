@@ -14,10 +14,20 @@
   <p class="prompt">FIND THIS COLOUR</p>
   <p class="hex">{{ targetHex() }}</p>
 
-  <div class="picker-placeholder">
-    <button type="button" class="dev-shortcut" (click)="pickTarget()">
-      [DEV] Submit exact colour
-    </button>
-    <p class="hint">The 2D picker will be added in the next step.</p>
+  <div class="picker">
+    <canvas
+      #canvas
+      (pointerdown)="onPointerDown($event)"
+      (pointermove)="onPointerMove($event)"
+      (pointerup)="onPointerUp($event)"
+      (pointercancel)="onPointerUp($event)"
+    ></canvas>
+    @if (cursorVisible()) {
+      <div
+        class="cursor"
+        [style.left.px]="cursorX()"
+        [style.top.px]="cursorY()"
+      ></div>
+    }
   </div>
 </section>
